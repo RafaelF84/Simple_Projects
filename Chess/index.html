@@ -8,8 +8,43 @@
 </head>
 <body>
   <h1>Chess Game</h1>
-  <div id="chessboard"></div>
-
+  <div id="move-info"></div>
+  <div style="display: flex; justify-content: center; align-items: flex-start; width: 100%;">
+    <div id="board-outer" style="position: relative; width: 360px; height: 360px;">
+      <!-- File coordinates (top) -->
+      <div id="files" style="display: flex; position: absolute; top: 0; left: 40px; width: 320px; height: 20px;">
+        <div style="flex:1;text-align:center;">a</div>
+        <div style="flex:1;text-align:center;">b</div>
+        <div style="flex:1;text-align:center;">c</div>
+        <div style="flex:1;text-align:center;">d</div>
+        <div style="flex:1;text-align:center;">e</div>
+        <div style="flex:1;text-align:center;">f</div>
+        <div style="flex:1;text-align:center;">g</div>
+        <div style="flex:1;text-align:center;">h</div>
+      </div>
+      <!-- Rank coordinates (left) -->
+      <div id="ranks" style="position: absolute; left: 0; top: 20px; width: 20px; height: 320px; display: flex; flex-direction: column;">
+        <div style="flex:1;align-items:center;display:flex;justify-content:center;">8</div>
+        <div style="flex:1;align-items:center;display:flex;justify-content:center;">7</div>
+        <div style="flex:1;align-items:center;display:flex;justify-content:center;">6</div>
+        <div style="flex:1;align-items:center;display:flex;justify-content:center;">5</div>
+        <div style="flex:1;align-items:center;display:flex;justify-content:center;">4</div>
+        <div style="flex:1;align-items:center;display:flex;justify-content:center;">3</div>
+        <div style="flex:1;align-items:center;display:flex;justify-content:center;">2</div>
+        <div style="flex:1;align-items:center;display:flex;justify-content:center;">1</div>
+      </div>
+      <!-- Chessboard -->
+      <div id="chessboard" style="position: absolute; left: 40px; top: 20px; width: 320px; height: 320px;"></div>
+    </div>
+    <div id="sidebar">
+      <button id="toggle-history">Show Moves</button>
+      <div id="move-history-panel" style="display:none;">
+        <button id="close-history" style="float:right;">✖</button>
+        <h3>Move History</h3>
+        <div id="move-history"></div>
+      </div>
+    </div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
