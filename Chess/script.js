@@ -99,6 +99,14 @@ function onDrop(e) {
   boardState[dropIndex] = boardState[dragSourceIndex];
   boardState[dragSourceIndex] = "";
 
+  // Promoção de peão
+  if (boardState[dropIndex] === "♙" && Math.floor(dropIndex / 8) === 0) {
+    boardState[dropIndex] = "♕";
+  }
+  if (boardState[dropIndex] === "♟" && Math.floor(dropIndex / 8) === 7) {
+    boardState[dropIndex] = "♛";
+  }
+
   turn = turn === "white" ? "black" : "white";
   validMoves = [];
   dragSourceIndex = null;
@@ -126,6 +134,15 @@ function onSquareClick(e) {
     if (validMoves.includes(index)) {
       boardState[index] = boardState[selected];
       boardState[selected] = "";
+
+      // Promoção de peão
+      if (boardState[index] === "♙" && Math.floor(index / 8) === 0) {
+        boardState[index] = "♕";
+      }
+      if (boardState[index] === "♟" && Math.floor(index / 8) === 7) {
+        boardState[index] = "♛";
+      }
+
       turn = turn === "white" ? "black" : "white";
     }
     clearSelection();
