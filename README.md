@@ -56,6 +56,8 @@ No installation or setup required.
 - `style.css` — styling for the board and pieces
 - `script.js` — chess game logic and interactivity
 
+---
+
 # Medical Appointments
 
 A simple desktop application for managing medical appointments, built with Java Swing.
