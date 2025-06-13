@@ -11,8 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class AppointmentPanel extends JPanel {
-    private final JComboBox<String> patientComboBox;
-    private final JComboBox<String> doctorComboBox;
+    private final JComboBox<Patient> patientComboBox;
+    private final JComboBox<Doctor> doctorComboBox;
     private final JTextField dateTimeField;
     private final AppointmentSystem system;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -50,36 +50,31 @@ public class AppointmentPanel extends JPanel {
         gbc.gridwidth = 2;
         add(scheduleButton, gbc);
 
-        loadPatients();
-        loadDoctors();
+        reloadComboBoxes();
 
         scheduleButton.addActionListener(e -> scheduleAppointment());
     }
 
-    private void loadPatients() {
+    public void reloadComboBoxes() {
         patientComboBox.removeAllItems();
         List<Patient> patients = system.getPatients();
         if (patients.isEmpty()) {
-            patientComboBox.addItem("No patients registered");
             patientComboBox.setEnabled(false);
         } else {
             patientComboBox.setEnabled(true);
             for (Patient p : patients) {
-                patientComboBox.addItem(p.getName() + " (ID: " + p.getId() + ")");
+                patientComboBox.addItem(p);
             }
         }
-    }
 
-    private void loadDoctors() {
         doctorComboBox.removeAllItems();
         List<Doctor> doctors = system.getDoctors();
         if (doctors.isEmpty()) {
-            doctorComboBox.addItem("No doctors registered");
             doctorComboBox.setEnabled(false);
         } else {
             doctorComboBox.setEnabled(true);
             for (Doctor d : doctors) {
-                doctorComboBox.addItem(d.getName() + " (License: " + d.getLicenseNumber() + ")");
+                doctorComboBox.addItem(d);
             }
         }
     }
@@ -90,20 +85,17 @@ public class AppointmentPanel extends JPanel {
             return;
         }
 
-        int patientIndex = patientComboBox.getSelectedIndex();
-        int doctorIndex = doctorComboBox.getSelectedIndex();
+        Patient selectedPatient = (Patient) patientComboBox.getSelectedItem();
+        Doctor selectedDoctor = (Doctor) doctorComboBox.getSelectedItem();
         String dateTimeText = dateTimeField.getText().trim();
 
-        if (dateTimeText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter date and time.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (selectedPatient == null || selectedDoctor == null || dateTimeText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill all fields.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         try {
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeText, formatter);
-            Patient selectedPatient = system.getPatients().get(patientIndex);
-            Doctor selectedDoctor = system.getDoctors().get(doctorIndex);
-
             boolean success = system.scheduleAppointment(selectedPatient, selectedDoctor, dateTime);
             if (success) {
                 JOptionPane.showMessageDialog(this, "Appointment scheduled successfully!");

@@ -34,10 +34,9 @@ public class AppointmentSystem {
     }
 
     public boolean scheduleAppointment(Patient patient, Doctor doctor, LocalDateTime dateTime) {
-        // Check for doctor conflict
         for (Appointment appt : appointments) {
             if (appt.getDoctor().equals(doctor) && appt.getDateTime().equals(dateTime)) {
-                return false; // conflict
+                return false;
             }
         }
         appointments.add(new Appointment(patient, doctor, dateTime));

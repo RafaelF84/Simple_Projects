@@ -15,9 +15,10 @@ public class MainWindow extends JFrame {
         setTitle("Medical Appointment System");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
+        setMinimumSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(1000, 700));
         setLocationRelativeTo(null);
 
-        // Optional: Add a logo or header
         JLabel header = new JLabel("Medical Appointment System", SwingConstants.CENTER);
         header.setFont(new Font("Segoe UI", Font.BOLD, 28));
         header.setBorder(new EmptyBorder(20, 0, 20, 0));
@@ -25,11 +26,28 @@ public class MainWindow extends JFrame {
 
         JTabbedPane tabs = new JTabbedPane();
 
-        tabs.addTab("Register Patient", new ImageIcon("resources/icons/patient.png"), new PatientRegistrationPanel(system));
-        tabs.addTab("Register Doctor", new ImageIcon("resources/icons/doctor.png"), new DoctorRegistrationPanel(system));
-        tabs.addTab("Schedule Appointment", new ImageIcon("resources/icons/calendar.png"), new AppointmentPanel(system));
-        tabs.addTab("Appointments List", new ImageIcon("resources/icons/list.png"), new AppointmentListPanel(system));
+        AppointmentPanel appointmentPanel = new AppointmentPanel(system);
+
+        tabs.addTab("Register Patient", new PatientRegistrationPanel(system, appointmentPanel));
+        tabs.addTab("Register Doctor", new DoctorRegistrationPanel(system, appointmentPanel));
+        tabs.addTab("Schedule Appointment", appointmentPanel);
+        tabs.addTab("Appointments List", new AppointmentListPanel(system));
 
         add(tabs, BorderLayout.CENTER);
+
+        JButton themeToggle = new JButton("Toggle Theme");
+        themeToggle.addActionListener(e -> {
+            try {
+                if (UIManager.getLookAndFeel().getName().contains("Dark")) {
+                    UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+                } else {
+                    UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf");
+                }
+                SwingUtilities.updateComponentTreeUI(this);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        add(themeToggle, BorderLayout.SOUTH);
     }
 }

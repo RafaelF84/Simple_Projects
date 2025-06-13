@@ -8,8 +8,10 @@ import java.awt.*;
 public class DoctorRegistrationPanel extends JPanel {
     private final JTextField nameField;
     private final JTextField licenseField;
+    private final AppointmentPanel appointmentPanel;
 
-    public DoctorRegistrationPanel(AppointmentSystem system) {
+    public DoctorRegistrationPanel(AppointmentSystem system, AppointmentPanel appointmentPanel) {
+        this.appointmentPanel = appointmentPanel;
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -47,6 +49,7 @@ public class DoctorRegistrationPanel extends JPanel {
                 JOptionPane.showMessageDialog(this, "Doctor registered successfully!");
                 nameField.setText("");
                 licenseField.setText("");
+                appointmentPanel.reloadComboBoxes();
             }
         });
     }

@@ -9,11 +9,11 @@ public class Doctor {
         this.licenseNumber = licenseNumber;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+    public String getLicenseNumber() { return licenseNumber; }
 
-    public String getLicenseNumber() {
-        return licenseNumber;
+    @Override
+    public String toString() {
+        return name + " (License: " + licenseNumber + ")";
     }
 }

@@ -38,17 +38,13 @@ public class AppointmentListPanel extends JPanel {
         tableModel.setRowCount(0);
 
         List<Appointment> appointments = system.getAppointments();
-        if (appointments.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No appointments scheduled.", "Info", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            for (Appointment appt : appointments) {
-                Object[] row = {
-                    appt.getPatient().getName(),
-                    appt.getDoctor().getName(),
-                    appt.getDateTime().format(formatter)
-                };
-                tableModel.addRow(row);
-            }
+        for (Appointment appt : appointments) {
+            Object[] row = {
+                appt.getPatient().toString(),
+                appt.getDoctor().toString(),
+                appt.getDateTime().format(formatter)
+            };
+            tableModel.addRow(row);
         }
     }
 }
