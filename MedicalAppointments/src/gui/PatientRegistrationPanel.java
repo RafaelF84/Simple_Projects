@@ -15,6 +15,8 @@ public class PatientRegistrationPanel extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
+        setBorder(BorderFactory.createTitledBorder("Patient Registration"));
+
         JLabel nameLabel = new JLabel("Patient Name:");
         gbc.gridx = 0; gbc.gridy = 0;
         add(nameLabel, gbc);
