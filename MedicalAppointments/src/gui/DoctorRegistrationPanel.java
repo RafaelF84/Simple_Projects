@@ -8,10 +8,7 @@ import java.awt.*;
 public class DoctorRegistrationPanel extends JPanel {
     private final JTextField nameField;
     private final JTextField licenseField;
-    private final AppointmentPanel appointmentPanel;
-
     public DoctorRegistrationPanel(AppointmentSystem system, AppointmentPanel appointmentPanel) {
-        this.appointmentPanel = appointmentPanel;
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);

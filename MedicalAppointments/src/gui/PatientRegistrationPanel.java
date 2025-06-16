@@ -8,10 +8,9 @@ import java.awt.*;
 public class PatientRegistrationPanel extends JPanel {
     private final JTextField nameField;
     private final JTextField idField;
-    private final AppointmentPanel appointmentPanel;
+    // Removed unused appointmentPanel field
 
     public PatientRegistrationPanel(AppointmentSystem system, AppointmentPanel appointmentPanel) {
-        this.appointmentPanel = appointmentPanel;
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
